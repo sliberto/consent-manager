@@ -143,11 +143,6 @@
       "limit": "55 KB"
     }
   ],
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "prettier": {
     "tabWidth": 2,
     "semi": false,

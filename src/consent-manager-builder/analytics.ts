@@ -17,6 +17,14 @@ interface AnalyticsParams {
   categoryPreferences: CategoryPreferences | null | undefined
 }
 
+function customeOverideCategoryPreferences(categoryPreferences: CategoryPreferences) {
+  if (categoryPreferences.marketingAndAnalytics) {
+    categoryPreferences.analytics = true
+  } else {
+    categoryPreferences.analytics = false
+  }
+  return categoryPreferences
+}
 function getConsentMiddleware(
   destinationPreferences,
   categoryPreferences,
@@ -30,14 +38,6 @@ function getConsentMiddleware(
     }
     next(payload)
   }
-}
-function customeOverideCategoryPreferences(categoryPreferences: CategoryPreferences) {
-  if (categoryPreferences.marketingAndAnalytics) {
-    categoryPreferences.analytics = true;
-  } else {
-    categoryPreferences.analytics = false;
-  }
-  return categoryPreferences
 }
 
 export default function conditionallyLoadAnalytics({

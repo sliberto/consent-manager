@@ -25,11 +25,19 @@ function getConsentMiddleware(
   return ({ payload, next }) => {
     payload.obj.context.consent = {
       defaultDestinationBehavior,
-      categoryPreferences,
+      categoryPreferences: customeOverideCategoryPreferences(categoryPreferences),
       destinationPreferences
     }
     next(payload)
   }
+}
+function customeOverideCategoryPreferences(categoryPreferences: CategoryPreferences) {
+  if (categoryPreferences.marketingAndAnalytics) {
+    categoryPreferences.analytics = true;
+  } else {
+    categoryPreferences.analytics = false;
+  }
+  return categoryPreferences
 }
 
 export default function conditionallyLoadAnalytics({
